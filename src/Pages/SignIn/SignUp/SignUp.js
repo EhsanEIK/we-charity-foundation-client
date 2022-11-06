@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const SignUp = () => {
+    const { createUser } = useContext(AuthContext);
+    const [errorMsg, setErrorMsg] = useState('');
+
+    const handleSignUp = event => {
+        event.preventDefault();
+        setErrorMsg('');
+
+        const form = event.target;
+        const name = form.userName.value;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        createUser(email, password)
+            .then(result => {
+                toast.success('User Created Successfully');
+                form.reset();
+            })
+            .catch(error => setErrorMsg(error.message));
+    }
     return (
         <section className="bg-white dark:bg-gray-900">
             <div className="container flex items-center justify-center px-6 mx-auto">
-                <form className="w-full max-w-md">
+                <form onSubmit={handleSignUp} className="w-full max-w-md">
                     <h1 className="text-3xl font-semibold text-gray-800 capitalize dark:text-white">Sign Up</h1>
 
                     <div class="relative flex items-center mt-8">
@@ -15,7 +36,7 @@ const SignUp = () => {
                             </svg>
                         </span>
 
-                        <input type="text" class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Username" />
+                        <input type="text" name='userName' class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Username" />
                     </div>
 
                     <div className="relative flex items-center mt-4">
@@ -25,7 +46,7 @@ const SignUp = () => {
                             </svg>
                         </span>
 
-                        <input type="email" className="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Email address" />
+                        <input type="email" name='email' className="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Email address" required />
                     </div>
 
                     <div className="relative flex items-center mt-4">
@@ -35,7 +56,7 @@ const SignUp = () => {
                             </svg>
                         </span>
 
-                        <input type="password" className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password" />
+                        <input type="password" name='password' className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password" required />
                     </div>
 
                     <div className="mt-6">
@@ -48,6 +69,7 @@ const SignUp = () => {
                             </Link>
                         </div>
                     </div>
+                    <p className='text-xl text-red-600 text-center mt-3'>{errorMsg}</p>
                 </form>
             </div>
         </section>
