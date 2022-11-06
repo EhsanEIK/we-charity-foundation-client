@@ -1,9 +1,16 @@
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Header = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleSignOut = () => {
+        logOut()
+            .then(() => toast.success("Sign Out Successfully"))
+            .catch(error => console.error(error));
+    }
 
     return (
         <nav class="relative bg-white shadow dark:bg-gray-800">
@@ -15,7 +22,7 @@ const Header = () => {
                     {
                         user ? <>
                             <p>Welcome, {user?.email}</p>
-                            <button class="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0" href="#">Sign Out</button>
+                            <button onClick={handleSignOut} class="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0" href="#">Sign Out</button>
                         </>
                             :
                             <>
