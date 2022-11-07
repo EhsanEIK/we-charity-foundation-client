@@ -3,6 +3,7 @@ import Main from "../../layouts/Main/Main";
 import Activities from "../../Pages/Admin/Admin/Activities/Activities";
 import AddActivity from "../../Pages/Admin/Admin/Activities/AddActivity";
 import Home from "../../Pages/Home/Home/Home";
+import Profile from "../../Pages/Profile/Profile/Profile";
 import SignIn from "../../Pages/SignIn/SignIn/SignIn";
 import SignUp from "../../Pages/SignIn/SignUp/SignUp";
 
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
                 element: <Activities></Activities>
             },
             { path: '/addActivity', element: <AddActivity></AddActivity> },
+            { path: '/profile', element: <Profile></Profile> }
         ]
     },
     { path: '/signin', element: <SignIn></SignIn> },
