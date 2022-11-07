@@ -50,7 +50,7 @@ const SignIn = () => {
                     headers: {
                         'content-type': 'application/json'
                     },
-                    body: JSON.stringify({ currentUser: result.user?.email }),
+                    body: JSON.stringify({ currentUser: result?.user?.email }),
                 })
                     .then(res => res.json())
                     .then(data => {

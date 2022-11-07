@@ -1,12 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const MyActivity = ({ myActivity, handleDeleteMyActivity }) => {
+    const { logOut } = useContext(AuthContext);
     const { _id, activityId, title, date, banner } = myActivity;
+
+    const navigate = useNavigate();
 
     const [acitivity, setMyAcitivity] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/activities/${activityId}`)
-            .then(res => res.json())
+        fetch(`http://localhost:5000/activities/${activityId}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('we-token')}`,
+            }
+        })
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    return logOut()
+                        .then(() => navigate('/signin'))
+                        .catch(err => console.error(err));
+                }
+                return res.json();
+            })
             .then(data => setMyAcitivity(data));
     }, [activityId]);
 

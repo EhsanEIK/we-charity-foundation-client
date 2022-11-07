@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const AddActivity = () => {
+    const { logOut } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleAddActivity = event => {
@@ -17,11 +19,19 @@ const AddActivity = () => {
         fetch('http://localhost:5000/activities', {
             method: "POST",
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('we-token')}`,
             },
             body: JSON.stringify(activity)
         })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    return logOut()
+                        .then(() => navigate('/signin'))
+                        .catch(err => console.error(err));
+                }
+                return res.json();
+            })
             .then(data => {
                 if (data.acknowledged) {
                     toast.success('Added Activity Successfully');

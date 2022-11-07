@@ -1,10 +1,13 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Activity = ({ activity }) => {
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
     const { _id, title, banner, date } = activity;
+
+    const navigate = useNavigate();
 
     const handleAddMyActivity = () => {
         const myActivity = {
@@ -18,10 +21,18 @@ const Activity = ({ activity }) => {
             method: "POST",
             headers: {
                 'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('we-token')}`,
             },
             body: JSON.stringify(myActivity),
         })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    return logOut()
+                        .then(() => navigate('/signin'))
+                        .catch(err => console.error(err));
+                }
+                return res.json();
+            })
             .then(data => {
                 if (data.acknowledged) {
                     toast.success('Added the activity in your profile');
