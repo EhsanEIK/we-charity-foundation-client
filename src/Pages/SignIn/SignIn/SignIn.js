@@ -1,7 +1,7 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const SignIn = () => {
@@ -9,6 +9,10 @@ const SignIn = () => {
     const [errorMsg, setErrorMsg] = useState('');
 
     const googleProvider = new GoogleAuthProvider();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location?.state?.from?.pathname || '/';
 
     const handleSignIn = event => {
         event.preventDefault();
@@ -20,8 +24,20 @@ const SignIn = () => {
 
         signIn(email, password)
             .then(result => {
-                toast.success('User Signed In Successfully');
-                form.reset();
+                fetch('http://localhost:5000/jwt', {
+                    method: "POST",
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({ currentUser: email }),
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('we-token', data.token);
+                        toast.success('User Signed In Successfully');
+                        form.reset();
+                        navigate(from, { replace: true });
+                    })
             })
             .catch(error => setErrorMsg(error.message));
     }
@@ -29,7 +45,19 @@ const SignIn = () => {
     const handleGoogleLogin = provider => {
         socialMediaLogin(googleProvider)
             .then(result => {
-                toast.success('User Signed In Successfully with Google');
+                fetch('http://localhost:5000/jwt', {
+                    method: "POST",
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({ currentUser: result.user?.email }),
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('we-token', data.token);
+                        toast.success('User Signed In Successfully with Google');
+                        navigate(from, { replace: true });
+                    })
             })
             .catch(error => setErrorMsg(error.message));
     }
