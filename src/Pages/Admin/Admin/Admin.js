@@ -1,5 +1,5 @@
 import React from 'react';
-import Activities from './Activities/Activities';
+import Activities from '../Activities/Activities';
 
 const Admin = () => {
     return (

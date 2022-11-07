@@ -1,13 +1,13 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
-import Activity from '../../Admin/Admin/Activities/Activity';
+import Activity from '../../Admin/Activities/Activity';
 
 const Home = () => {
     const activities = useLoaderData();
 
     return (
         <div>
-            <div className='grid md:grid-cols-3 grid-cols-1 gap-5'>
+            <div className='grid md:grid-cols-3 grid-cols-1 gap-5 gap-y-10'>
                 {
                     activities.map(activity => <Activity
                         key={activity._id}

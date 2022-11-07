@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../layouts/Main/Main";
-import Activities from "../../Pages/Admin/Admin/Activities/Activities";
-import AddActivity from "../../Pages/Admin/Admin/Activities/AddActivity";
+import AddActivity from "../../Pages/Admin/Activities/AddActivity";
+import Admin from "../../Pages/Admin/Admin/Admin";
 import Home from "../../Pages/Home/Home/Home";
 import Profile from "../../Pages/Profile/Profile/Profile";
 import SignIn from "../../Pages/SignIn/SignIn/SignIn";
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/admin',
-                element: <Activities></Activities>
+                element: <Admin></Admin>
             },
             { path: '/addActivity', element: <AddActivity></AddActivity> },
             { path: '/profile', element: <Profile></Profile> }
