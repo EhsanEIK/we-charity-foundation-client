@@ -12,8 +12,6 @@ const MyActivities = () => {
             .then(data => setMyActivities(data));
     }, [user?.email]);
 
-    console.log(myActivities)
-
     return (
         <div>
             <div className='grid grid-cols-2 gap-5'>
