@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const MyActivity = ({ myActivity }) => {
+const MyActivity = ({ myActivity, handleDeleteMyActivity }) => {
     const { _id, activityId, title, date, banner } = myActivity;
 
     const [acitivity, setMyAcitivity] = useState([]);
@@ -25,7 +25,7 @@ const MyActivity = ({ myActivity }) => {
 
                 <div className="flex justify-between mt-3 item-center">
                     <h1 className="text-sm font-bold text-gray-700 dark:text-gray-200">{date}</h1>
-                    <button className="px-2 py-1 text-xs font-bold text-white uppercase transition-colors duration-300 transform bg-red-700 rounded dark:bg-gray-700 hover:bg-red-600 dark:hover:bg-gray-600 focus:outline-none focus:bg-gray-700 dark:focus:bg-gray-600">cancel</button>
+                    <button onClick={() => handleDeleteMyActivity(_id, title)} className="px-2 py-1 text-xs font-bold text-white uppercase transition-colors duration-300 transform bg-red-700 rounded dark:bg-gray-700 hover:bg-red-600 dark:hover:bg-gray-600 focus:outline-none focus:bg-gray-700 dark:focus:bg-gray-600">cancel</button>
                 </div>
             </div>
         </div >
