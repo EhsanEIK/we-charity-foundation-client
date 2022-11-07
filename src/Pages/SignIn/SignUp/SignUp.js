@@ -25,9 +25,9 @@ const SignUp = () => {
     }
     return (
         <section className="bg-white dark:bg-gray-900">
-            <div className="container flex items-center justify-center px-6 mx-auto">
+            <div className="container flex items-center justify-center px-6 mx-auto mt-10">
                 <form onSubmit={handleSignUp} className="w-full max-w-md">
-                    <h1 className="text-3xl font-semibold text-gray-800 capitalize dark:text-white">Sign Up</h1>
+                    <h1 className="text-3xl text-center font-semibold text-gray-800 capitalize dark:text-white">Sign Up</h1>
 
                     <div class="relative flex items-center mt-8">
                         <span class="absolute">

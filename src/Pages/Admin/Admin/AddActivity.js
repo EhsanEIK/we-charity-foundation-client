@@ -3,7 +3,7 @@ import React from 'react';
 const AddActivity = () => {
     return (
         <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-            <h2 className="text-lg font-semibold text-gray-700 text-center capitalize dark:text-white">Add Charity Activity</h2>
+            <h2 className="text-2xl font-semibold text-gray-700 text-center capitalize dark:text-white mb-10">Add Charity Activity</h2>
 
             <form>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-2/4 mx-auto mt-4">
