@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../layouts/Main/Main";
-import AddActivity from "../../Pages/Admin/Admin/AddActivity";
-import Admin from "../../Pages/Admin/Admin/Admin";
+import Activities from "../../Pages/Admin/Admin/Activities/Activities";
+import AddActivity from "../../Pages/Admin/Admin/Activities/AddActivity";
+import Home from "../../Pages/Home/Home/Home";
 import SignIn from "../../Pages/SignIn/SignIn/SignIn";
 import SignUp from "../../Pages/SignIn/SignUp/SignUp";
 
@@ -11,7 +12,15 @@ export const router = createBrowserRouter([
         element: <Main></Main>,
         errorElement: <div>404</div>,
         children: [
-            { path: '/admin', element: <Admin></Admin> },
+            {
+                path: '/',
+                loader: () => fetch('http://localhost:5000/activities'),
+                element: <Home></Home>
+            },
+            {
+                path: '/admin',
+                element: <Activities></Activities>
+            },
             { path: '/addActivity', element: <AddActivity></AddActivity> },
         ]
     },

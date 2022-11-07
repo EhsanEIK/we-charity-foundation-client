@@ -9,10 +9,11 @@ const AddActivity = () => {
         event.preventDefault();
         const form = event.target;
         const title = form.title.value;
+        const bannerURL = form.bannerURL.value;
         const description = form.description.value;
         const date = form.eventDate.value;
 
-        const activity = { title, date, description };
+        const activity = { title, date, banner: bannerURL, description };
         fetch('http://localhost:5000/activities', {
             method: "POST",
             headers: {
@@ -43,6 +44,10 @@ const AddActivity = () => {
                     <div>
                         <label className="text-gray-700 dark:text-gray-200" htmlFor="eventDate">Event Date</label>
                         <input id="eventDate" name='eventDate' type="date" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                    </div>
+                    <div className='col-span-2'>
+                        <label className="text-gray-700 dark:text-gray-200" htmlFor="bannerURL">Banner URL</label>
+                        <input id="bannerURL" name='bannerURL' type="text" className="col-span-2 block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
                     </div>
                     <div className='col-span-2'>
                         <label className="text-gray-700 dark:text-gray-200" htmlFor="description">Description</label>
