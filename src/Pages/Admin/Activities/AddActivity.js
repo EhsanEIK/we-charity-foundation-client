@@ -16,7 +16,7 @@ const AddActivity = () => {
         const date = form.eventDate.value;
 
         const activity = { title, date, banner: bannerURL, description };
-        fetch('http://localhost:5000/activities', {
+        fetch('https://we-charity-foundation-server.vercel.app/activities', {
             method: "POST",
             headers: {
                 'content-type': 'application/json',

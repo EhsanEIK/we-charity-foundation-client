@@ -10,7 +10,7 @@ const MyActivity = ({ myActivity, handleDeleteMyActivity }) => {
 
     const [acitivity, setMyAcitivity] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/activities/${activityId}`, {
+        fetch(`https://we-charity-foundation-server.vercel.app/activities/${activityId}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('we-token')}`,
             }

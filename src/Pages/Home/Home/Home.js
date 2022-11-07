@@ -8,7 +8,7 @@ const Home = () => {
     const [count, setCount] = useState([]);
     const [activities, setActivities] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/activities?page=${page}&size=${size}`)
+        fetch(`https://we-charity-foundation-server.vercel.app/activities?page=${page}&size=${size}`)
             .then(res => res.json())
             .then(data => {
                 setActivities(data.activities);

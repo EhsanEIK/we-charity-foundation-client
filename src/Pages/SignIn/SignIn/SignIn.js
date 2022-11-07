@@ -24,7 +24,7 @@ const SignIn = () => {
 
         signIn(email, password)
             .then(result => {
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://we-charity-foundation-server.vercel.app/jwt', {
                     method: "POST",
                     headers: {
                         'content-type': 'application/json'
@@ -45,7 +45,7 @@ const SignIn = () => {
     const handleGoogleLogin = provider => {
         socialMediaLogin(googleProvider)
             .then(result => {
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://we-charity-foundation-server.vercel.app/jwt', {
                     method: "POST",
                     headers: {
                         'content-type': 'application/json'

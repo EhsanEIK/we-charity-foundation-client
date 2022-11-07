@@ -10,7 +10,7 @@ const MyActivities = () => {
 
     const [myActivities, setMyActivities] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/myActivities?email=${user?.email}`, {
+        fetch(`https://we-charity-foundation-server.vercel.app/myActivities?email=${user?.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('we-token')}`,
             }
@@ -29,7 +29,7 @@ const MyActivities = () => {
     const handleDeleteMyActivity = (id, title) => {
         const agree = window.confirm("Are you sure to cancel this?");
         if (agree) {
-            fetch(`http://localhost:5000/myActivities/${id}`, {
+            fetch(`https://we-charity-foundation-server.vercel.app/myActivities/${id}`, {
                 method: "DELETE",
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('we-token')}`,

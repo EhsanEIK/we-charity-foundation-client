@@ -17,7 +17,7 @@ const Activity = ({ activity }) => {
             banner,
             date,
         }
-        fetch('http://localhost:5000/myActivities', {
+        fetch('https://we-charity-foundation-server.vercel.app/myActivities', {
             method: "POST",
             headers: {
                 'content-type': 'application/json',
